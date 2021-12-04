@@ -1,17 +1,16 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        val depths = input.map { it.toInt() }
+        return depths.zipWithNext().count { it.first < it.second }
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val depths = input.map { it.toInt() }
+        val normalizedDepths = depths.windowed(3).map { it.sum() }
+        return normalizedDepths.zipWithNext().count { it.first < it.second }
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
+    val input = readInput("day_1")
     println(part1(input))
     println(part2(input))
 }
